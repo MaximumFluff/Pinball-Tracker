@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,26 +21,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = '%sf%@94k)6&w@k6b6lh40qzdmf^n638ztu$)1%4q+6j+ztm3=%'
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '%sf%@94k)6&w@k6b6lh40qzdmf^n638ztu$)1%4q+6j+ztm3=%')
+SECRET_KEY = '%sf%@94k)6&w@k6b6lh40qzdmf^n638ztu$)1%4q+6j+ztm3=%'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-#DEBUG = False
-#DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
-#DJANGO_DEBUG = False
+DEBUG = False
 
 ALLOWED_HOSTS = []
-
-SECURE_SSL_REDIRECT = True
-
-SESSION_COOKIE_SECURE = True
-
-CSRF_COOKIE_SECURE = True
-
-SECURE_HSTS_SECONDS = 300
-
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Application definition
 
@@ -132,20 +120,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/templates/'
+STATIC_URL = '/static/'
 
-# The absolute path to the directory where collectstatic will collect static files for deployment.
-STATIC_ROOT = os.path.join(BASE_DIR, 'templates')
-
-# The URL to use when referring to static files (where they will be served from)
-
-# Simplified static file serving.
-# https://warehouse.python.org/project/whitenoise/
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-# Heroku: Update database configuration from $DATABASE_URL.
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
-
-#export DJANGO_DEBUG=False
+# Activate Django-Heroku.
+django_heroku.settings(locals())
