@@ -1,0 +1,1 @@
+web: gunicorn pinball_tracker.wsgi --log-file -
