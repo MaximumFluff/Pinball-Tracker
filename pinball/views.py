@@ -9,12 +9,11 @@ def index(request):
     if request.method == 'POST':
         form = ScoreForm(request.POST)
         if form.is_valid():
-            q = Score(high_score=form.data['high_score'],
-                      username=form.data['username'], date=timezone.now())
+            q = Score(high_score=form.data['high_score'], username=form.data['username'], date=timezone.now())
             q.save()
-            form = ScoreForm()
-            context = {'scores': scores, 'form': form, 'title': 'Home'}
-            return render(request, 'pinball/index.html', context)
+        form = ScoreForm()
+        context = {'scores': scores, 'form': form, 'title': 'Home'}
+        return render(request, 'pinball/index.html', context)
     else:
         form = ScoreForm()
         context = {'scores': scores, 'form': form, 'title': 'Home'}

@@ -3,6 +3,6 @@ from . import views
 
 app_name = 'pinball'
 urlpatterns = [
-  path('', views.index, name='index'),
-  path('list_all/', views.list_all, name='list_all')
+    path('', views.index, name='index'),
+    path('list_all/', views.list_all, name='list_all'),
 ]
